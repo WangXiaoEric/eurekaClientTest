@@ -1,0 +1,26 @@
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: false
+  instance:
+    statusPageUrl: https://${eureka.hostname}/info
+    healthCheckUrl: https://${eureka.hostname}/health
+    homePageUrl: https://${eureka.hostname}/
+    nonSecurePortEnabled: true
+    securePortEnabled: false
+zuul:
+  threadPool:
+    useSeparateThreadPools: true
+    threadPoolKeyPrefix: zuulgw
+  routes:
+    users:
+      path: /myusers/**
+      serviceId: users_service
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
